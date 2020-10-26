@@ -1,5 +1,8 @@
 # Cubits for Android
-This is a light weight architecture library which import and extends the idea of flutter cubits to android development
+This framework brings the Cuibt architecture to Android.
+Cubit is a light weight [BLoC](https://github.com/felangel/bloc/tree/master/packages/bloc) without the concept of events.
+
+**NOTE**: This framework in alpha. So please feel free to test it, create issues or to give feedback.
 
 # Gradle
 1. Add in your project build.gradle
