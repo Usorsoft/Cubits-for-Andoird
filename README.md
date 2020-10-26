@@ -1,4 +1,4 @@
-# android-cubit-architecture
+# Cubits for Android
 This is a light weight architecture library which import and extends the idea of flutter cubits to android development
 
 # Gradle
