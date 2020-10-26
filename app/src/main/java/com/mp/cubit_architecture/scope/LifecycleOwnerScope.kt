@@ -8,10 +8,9 @@ import com.example.cubit.Cubit
 import com.mp.cubit_architecture.foundation.CubitProvider
 import kotlin.reflect.KClass
 
-
 /**
- * This provides a [Cubit] for a [Activity] and ensures that the [Cubit] survives configuration
- * changes.
+ * This provides a [Cubit] for a [LifecycleOwner] and ensures that the [Cubit] survives its
+ * configuration changes.
  */
 object LifecycleOwnerScope {
     data class Data(val cubit: Cubit<*>, var destroyedAt: Long? = null)

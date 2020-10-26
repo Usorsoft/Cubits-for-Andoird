@@ -5,8 +5,12 @@ import com.mp.cubit_architecture.foundation.CubitProvider
 import kotlin.reflect.KClass
 
 /**
- * This provides [Cubit]s and ensures that they exist the complete life time of tha [Application].
- */
+ * This provides [Cubit]s and keeps the alive for the complete life time of the application.
+ *
+ * Created by Michael Pankraz on 12.07.20.
+ * <p>
+ * Copyright by Michael Pankraz
+*/
 object GlobalScope: CubitScope {
     private val storage = mutableMapOf<String, Cubit<*>>()
 

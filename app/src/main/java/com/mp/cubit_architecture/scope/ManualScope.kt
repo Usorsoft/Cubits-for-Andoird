@@ -4,6 +4,13 @@ import com.example.cubit.Cubit
 import com.mp.cubit_architecture.foundation.CubitProvider
 import kotlin.reflect.KClass
 
+/**
+ * This provides [Cubit]s and keeps them alive until a specific [Cubit] is disposed vai [dispose].
+ *
+ * Created by Michael Pankraz on 12.07.20.
+ * <p>
+ * Copyright by Michael Pankraz
+ */
 object ManualScope: CubitScope {
     private val storage = mutableMapOf<String, Cubit<*>>()
     private const val FALLBACK_NAME = "[FALLBACK_NAME]"

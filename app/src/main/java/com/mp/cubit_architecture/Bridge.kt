@@ -5,9 +5,24 @@ import com.example.cubit.Cubit
 import com.mp.cubit_architecture.foundation.CubitDsl
 import com.mp.cubit_architecture.foundation.CubitProvider
 import com.mp.cubit_architecture.scope.CubitScope
+import com.mp.cubit_architecture.scope.GlobalScope
 import com.mp.cubit_architecture.scope.LifecycleOwnerScope
+import com.mp.cubit_architecture.scope.ManualScope
 import kotlin.reflect.KClass
 
+/**
+ * This provides a [Cubit] from the [LifecycleOwnerScope] store if there is one, otherwise
+ * it creates a new one via [onCreate] and provides this one.
+ *
+ * Use this to keep the [Cubit] alive trough configuration changes.
+ *
+ * Specify a [identifier] if you want to have more than on [Cubit] of the same type
+ * per [lifecycleOwner].
+ *
+ * Created by Michael Pankraz on 12.07.20.
+ * <p>
+ * Copyright by Michael Pankraz
+ */
 @CubitDsl
 fun <C : Cubit<S>, S : Any> Cubit.Companion.of(
     lifecycleOwner: LifecycleOwner,
@@ -18,6 +33,20 @@ fun <C : Cubit<S>, S : Any> Cubit.Companion.of(
     return LifecycleOwnerScope.provide(cubit, lifecycleOwner, identifier ?: "", onCreate)
 }
 
+/**
+ * This provides a [Cubit] from the [scope] store if there is one, otherwise
+ * it creates a new one via [onCreate] and provides this one.
+ *
+ * Use this to keep the [Cubit] alive as long the [CubitScope] allows.
+ * Available scopes: [GlobalScope], [ManualScope]
+ *
+ * Specify a [identifier] if you want to have more than on [Cubit] of the same type
+ * per [scope].
+ *
+ * Created by Michael Pankraz on 12.07.20.
+ * <p>
+ * Copyright by Michael Pankraz
+ */
 @CubitDsl
 fun <C : Cubit<S>, S : Any> Cubit.Companion.of(
     scope: CubitScope,
