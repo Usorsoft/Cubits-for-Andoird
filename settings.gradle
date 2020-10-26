@@ -1,0 +1,2 @@
+rootProject.name = "cubit_architecture"
+include ':cubit'
