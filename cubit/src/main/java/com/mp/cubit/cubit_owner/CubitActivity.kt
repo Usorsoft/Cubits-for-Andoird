@@ -20,15 +20,4 @@ abstract class CubitActivity<CUBIT : Cubit<STATE>, STATE : Any> :
         super.onCreate(savedInstanceState)
         initCubitOwner()
     }
-
-    //TODO: Move to Scope stores
-    override fun onDestroy() {
-        super.onDestroy()
-
-        val keepCubitAlive = !isFinishing || isChangingConfigurations
-        if (!keepCubitAlive) {
-            cubit.removeFromScopeStore()
-            cubit.dispose()
-        }
-    }
 }
