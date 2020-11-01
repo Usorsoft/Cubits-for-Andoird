@@ -1,6 +1,7 @@
 package com.mp.cubit
 
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import com.mp.cubit.foundation.CubitDsl
 import com.mp.cubit.foundation.CubitProvider
@@ -20,6 +21,7 @@ import kotlin.reflect.KClass
  * <p>
  * Copyright by Michael Pankraz
  */
+@Deprecated("LifecycleScope will be removed soon, please use 'ActivityScope' or 'FragmentScope' instead.")
 @CubitDsl
 fun <C : Cubit<S>, S : Any> Cubit.Companion.of(
     lifecycleOwner: LifecycleOwner,
@@ -37,6 +39,29 @@ fun <C : Cubit<S>, S : Any> Cubit.Companion.of(
  * Use this to keep the [Cubit] alive trough configuration changes.
  *
  * Specify a [identifier] if you want to have more than on [Cubit] of the same type
+ * per [activityProvider].
+ *
+ * Created by Michael Pankraz on 12.07.20.
+ * <p>
+ * Copyright by Michael Pankraz
+ */
+@CubitDsl
+fun <C : Cubit<S>, S : Any> Cubit.Companion.of(
+    activityProvider: () -> AppCompatActivity,
+    cubit: KClass<C>,
+    identifier: String? = null,
+    onCreate: CubitProvider<C>
+): C {
+    return ActivityScope.provide(cubit, activityProvider, identifier ?: "", onCreate)
+}
+
+/**
+ * This provides a [Cubit] from the [FragmentScope] store if there is one, otherwise
+ * it creates a new one via [onCreate] and provides this one.
+ *
+ * Use this to keep the [Cubit] alive trough configuration changes.
+ *
+ * Specify a [identifier] if you want to have more than on [Cubit] of the same type
  * per [lifecycleOwner].
  *
  * Created by Michael Pankraz on 12.07.20.
@@ -45,12 +70,12 @@ fun <C : Cubit<S>, S : Any> Cubit.Companion.of(
  */
 @CubitDsl
 fun <C : Cubit<S>, S : Any> Cubit.Companion.of(
-    lifecycleOwner: AppCompatActivity,
+    lifecycleOwner: Fragment,
     cubit: KClass<C>,
     identifier: String? = null,
     onCreate: CubitProvider<C>
 ): C {
-    return ActivityScope.provide(cubit, lifecycleOwner, identifier ?: "", onCreate)
+    return FragmentScope.provide(cubit, lifecycleOwner, identifier ?: "", onCreate)
 }
 
 /**
