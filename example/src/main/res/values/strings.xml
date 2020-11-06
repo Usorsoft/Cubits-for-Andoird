@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Example</string>
+    <string name="onboarding_title">Onboarding</string>
+    <string name="onboarding_body_message">Put your onboarding content here</string>
+</resources>
