@@ -1,4 +1,4 @@
-package com.jamitlabs.remoteui_sdk.main
+package com.mp.example.pages.articles
 
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.clickable
@@ -16,14 +16,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.jamitlabs.remoteui_sdk.composables.AnimatedErrorHint
-import com.jamitlabs.remoteui_sdk.composables.AppBar
-import com.jamitlabs.remoteui_sdk.composables.Background
-import com.jamitlabs.remoteui_sdk.composables.MaxSizeBox
-import com.jamitlabs.remoteui_sdk.main.ArticlesState.Content
 import com.mp.cubit.StateBuilder
 import com.mp.cubit.StateViewOf
+import com.mp.example.composables.*
 import com.mp.example.pages.articles.models.ArticleEntryModel
+import com.mp.example.pages.articles.ArticlesState.*
 
 @kotlinx.coroutines.ExperimentalCoroutinesApi
 class MainView(cubit: ArticlesCubit): StateViewOf<ArticlesCubit, ArticlesState>(cubit) {

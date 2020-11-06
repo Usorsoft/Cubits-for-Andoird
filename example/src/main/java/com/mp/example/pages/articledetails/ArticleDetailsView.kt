@@ -8,10 +8,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.jamitlabs.remoteui_sdk.composables.AppBar
-import com.jamitlabs.remoteui_sdk.composables.Background
 import com.mp.cubit.StateBuilderOf
 import com.mp.cubit.StateViewOf
+import com.mp.example.composables.*
 import com.mp.example.pages.articledetails.ArticleDetailsState.Content
 import com.mp.example.pages.articles.models.ArticleEntryModel
 

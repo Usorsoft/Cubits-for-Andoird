@@ -1,8 +1,8 @@
-package com.jamitlabs.remoteui_sdk.start
+package com.mp.example.start
 
-import com.jamitlabs.remoteui_sdk.repositories.PreferencesRepository
-import com.jamitlabs.remoteui_sdk.start.StartAction.*
 import com.mp.cubit.Cubit
+import com.mp.example.pages.onboarding.OnboardingAction.*
+import com.mp.example.repositories.PreferencesRepository
 
 class StartCubit(private val prefs: PreferencesRepository) : Cubit<Unit>() {
 

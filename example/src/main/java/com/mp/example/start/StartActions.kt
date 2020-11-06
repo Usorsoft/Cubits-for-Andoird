@@ -1,4 +1,4 @@
-package com.jamitlabs.remoteui_sdk.start
+package com.mp.example.start
 
 sealed class StartAction {
     object ShowOnboarding: StartAction()

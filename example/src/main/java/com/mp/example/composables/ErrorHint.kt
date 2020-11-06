@@ -1,4 +1,4 @@
-package com.jamitlabs.remoteui_sdk.composables
+package com.mp.example.composables
 
 import androidx.compose.animation.DpPropKey
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -19,8 +19,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.jamitlabs.remoteui_sdk.composables.ErrorHintAnimationState.*
-import com.jamitlabs.remoteui_sdk.main.thenOptional
+import com.mp.example.pages.articles.thenOptional
+import com.mp.example.composables.ErrorHintAnimationState.*
 
 val height = DpPropKey()
 

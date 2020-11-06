@@ -1,15 +1,14 @@
-package com.jamitlabs.remoteui_sdk.main
+package com.mp.example.pages.articles
 
 import android.graphics.Color
-import com.jamitlabs.remoteui_sdk.NavigateNext
-import com.jamitlabs.remoteui_sdk.repositories.PreferencesRepository
 import com.mp.cubit.Cubit
 import com.mp.cubit.foundation.repeatReversed
-import com.mp.example.pages.articles.ShowArticleDetails
+import com.mp.example.NavigateNext
 import com.mp.example.pages.articles.models.ArticleEntryModel
 import com.mp.example.pages.articles.models.toDomainModel
 import com.mp.example.repositories.Article
 import com.mp.example.repositories.FakeArticlesRepository
+import com.mp.example.repositories.PreferencesRepository
 import com.mp.example.repositories.Success
 import kotlinx.coroutines.delay
 

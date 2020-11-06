@@ -1,15 +1,14 @@
-package com.jamitlabs.remoteui_sdk.start
+package com.mp.example.start
 
 import android.os.Bundle
-import com.jamitlabs.remoteui_sdk.main.ArticlesActivity
-import com.jamitlabs.remoteui_sdk.onboarding.OnboardingActivity
-import com.jamitlabs.remoteui_sdk.repositories.PreferencesRepository
-import org.koin.java.KoinJavaComponent
-import com.jamitlabs.remoteui_sdk.start.StartAction.*
 import com.mp.cubit.Cubit
 import com.mp.cubit.cubit_owner.CubitActivity
 import com.mp.cubit.of
+import com.mp.example.pages.articles.ArticlesActivity
+import com.mp.example.pages.onboarding.OnboardingActivity
+import com.mp.example.repositories.PreferencesRepository
 import org.koin.java.KoinJavaComponent.get
+import com.mp.example.start.StartAction.*
 
 class StartActivity : CubitActivity<StartCubit, Unit>() {
 

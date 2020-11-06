@@ -1,4 +1,4 @@
-package com.jamitlabs.remoteui_sdk.composables
+package com.mp.example.composables
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

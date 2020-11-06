@@ -1,4 +1,4 @@
-package com.jamitlabs.remoteui_sdk.onboarding
+package com.mp.example.pages.onboarding
 
 sealed class OnboardingAction {
     object ShowArticles: OnboardingAction()

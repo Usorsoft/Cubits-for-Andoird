@@ -1,4 +1,4 @@
-package com.jamitlabs.remoteui_sdk.main
+package com.mp.example.pages.articles
 
 import android.graphics.Color
 import com.mp.example.pages.articles.models.ArticleEntryModel

@@ -1,20 +1,11 @@
-package com.jamitlabs.remoteui_sdk.onboarding
+package com.mp.example.pages.onboarding
 
-import androidx.compose.foundation.Text
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.FloatingActionButton
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
-import com.jamitlabs.remoteui_sdk.composables.AppBar
-import com.jamitlabs.remoteui_sdk.composables.Background
 import com.mp.cubit.StateViewOf
 import com.mp.example.R
+import com.mp.example.composables.AppBar
 
 class OnboardingView(cubit: OnboardingCubit) :
     StateViewOf<OnboardingCubit, OnboardingCubit.State>(cubit) {

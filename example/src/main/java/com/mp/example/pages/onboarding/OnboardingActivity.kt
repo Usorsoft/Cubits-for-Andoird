@@ -1,17 +1,14 @@
-package com.jamitlabs.remoteui_sdk.onboarding
+package com.mp.example.pages.onboarding
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.compose.ui.platform.setContent
-import com.jamitlabs.remoteui_sdk.main.ArticlesActivity
-import com.jamitlabs.remoteui_sdk.onboarding.OnboardingAction.ShowArticles
-import com.jamitlabs.remoteui_sdk.repositories.PreferencesRepository
-import com.jamitlabs.remoteui_sdk.repositories.RuntimeStore
 import com.mp.cubit.Cubit
 import com.mp.cubit.cubit_owner.CubitActivity
 import com.mp.cubit.of
-import org.koin.java.KoinJavaComponent
+import com.mp.example.pages.articles.ArticlesActivity
+import com.mp.example.repositories.RuntimeStore
 import org.koin.java.KoinJavaComponent.get
 
 
@@ -40,7 +37,7 @@ class OnboardingActivity : CubitActivity<OnboardingCubit, OnboardingCubit.State>
 
     private fun onAction(action: OnboardingAction) {
         when (action) {
-            is ShowArticles -> {
+            is OnboardingAction.ShowArticles -> {
                 ArticlesActivity.start(this)
                 finish()
             }

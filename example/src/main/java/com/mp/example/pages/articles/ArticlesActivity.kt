@@ -1,19 +1,18 @@
-package com.jamitlabs.remoteui_sdk.main
+package com.mp.example.pages.articles
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.ui.platform.setContent
-import com.jamitlabs.remoteui_sdk.NavigateNext
-import com.jamitlabs.remoteui_sdk.repositories.PreferencesRepository
 import com.mp.cubit.Cubit
 import com.mp.cubit.cubit_owner.CubitActivity
 import com.mp.cubit.foundation.NavigateBack
 import com.mp.cubit.foundation.NavigationAction
 import com.mp.cubit.of
+import com.mp.example.NavigateNext
 import com.mp.example.pages.articledetails.ArticleDetailsActivity
-import com.mp.example.pages.articles.ShowArticleDetails
 import com.mp.example.repositories.FakeArticlesRepository
+import com.mp.example.repositories.PreferencesRepository
 import org.koin.java.KoinJavaComponent.get
 
 @kotlinx.coroutines.ExperimentalCoroutinesApi

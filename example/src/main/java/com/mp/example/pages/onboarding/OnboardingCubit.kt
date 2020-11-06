@@ -1,10 +1,9 @@
-package com.jamitlabs.remoteui_sdk.onboarding
+package com.mp.example.pages.onboarding
 
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import com.jamitlabs.remoteui_sdk.onboarding.OnboardingAction.ShowArticles
-import com.jamitlabs.remoteui_sdk.repositories.RuntimeStore
 import com.mp.cubit.Cubit
+import com.mp.example.repositories.RuntimeStore
 
 /**
  * This represents the logic component of the [OnboardingActivity].
@@ -26,7 +25,7 @@ class OnboardingCubit(private val runtimeStore: RuntimeStore) : Cubit<Onboarding
     }
 
     fun showArticles() {
-        emitAction(ShowArticles)
+        emitAction(OnboardingAction.ShowArticles)
     }
 
     override fun onDispose() {}

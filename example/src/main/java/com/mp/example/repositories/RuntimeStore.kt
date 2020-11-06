@@ -1,4 +1,4 @@
-package com.jamitlabs.remoteui_sdk.repositories
+package com.mp.example.repositories
 
 /**
  * This serves as store while app is running.

@@ -1,4 +1,4 @@
-package com.jamitlabs.remoteui_sdk.repositories
+package com.mp.example.repositories
 
 import android.content.Context
 import android.content.SharedPreferences

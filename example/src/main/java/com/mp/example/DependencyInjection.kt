@@ -1,12 +1,9 @@
-package com.jamitlabs.remoteui_sdk
+package com.mp.example
 
 import android.content.Context
-import com.jamitlabs.remoteui_sdk.repositories.PreferencesRepository
-import com.jamitlabs.remoteui_sdk.main.ArticlesCubit
-import com.jamitlabs.remoteui_sdk.onboarding.OnboardingCubit
-import com.jamitlabs.remoteui_sdk.repositories.RuntimeStore
-import com.jamitlabs.remoteui_sdk.start.StartCubit
 import com.mp.example.repositories.FakeArticlesRepository
+import com.mp.example.repositories.PreferencesRepository
+import com.mp.example.repositories.RuntimeStore
 import org.koin.core.context.startKoin
 import org.koin.core.parameter.ParametersDefinition
 import org.koin.core.qualifier.Qualifier

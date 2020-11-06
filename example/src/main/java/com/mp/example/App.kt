@@ -1,4 +1,4 @@
-package com.jamitlabs.remoteui_sdk
+package com.mp.example
 
 import android.app.Application
 import com.mp.cubit.foundation.NavigationAction
