@@ -19,7 +19,7 @@ object ActivityScope {
      * This holds all data needed for binding a cubit to an [AppCompatActivity].
      */
     private data class ScopeData(
-        val activityProvider: () -> AppCompatActivity,
+        val activity: AppCompatActivity?,
         val cubit: Cubit<*>,
         val lifecycleObserver: LifecycleObserver
     )
@@ -36,23 +36,23 @@ object ActivityScope {
      */
     fun <CUBIT : Cubit<STATE>, STATE : Any> provide(
         kClass: KClass<CUBIT>,
-        activityProvider: () -> AppCompatActivity,
+        activity: AppCompatActivity,
         identifier: String = "",
         onCreate: CubitProvider<CUBIT>
     ): CUBIT {
-        val key = buildKey(kClass, activityProvider(), identifier)
+        val key = buildKey(kClass, activity, identifier)
 
         storage[key]?.cubit?.let {
             return it as CUBIT
         }
 
         val data = ScopeData(
-            activityProvider = activityProvider,
+            activity = activity,
             cubit = onCreate(kClass.java),
             lifecycleObserver = createDestroyObserver(key)
         )
 
-        activityProvider().lifecycle.addObserver(data.lifecycleObserver)
+        activity.lifecycle.addObserver(data.lifecycleObserver)
         storage[key] = data
         return data.cubit as CUBIT
     }
@@ -62,11 +62,9 @@ object ActivityScope {
             @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
             fun onDestroy() {
                 val data = storage[dataKey] ?: return
-                val destroyCubit = data.activityProvider().let {
-                    it.isFinishing && it.isChangingConfigurations
-                }
-
-                if (destroyCubit) { disposeData(dataKey) }
+                val activity = data.activity
+                val destroyCubit = activity?.isFinishing ?: true
+                if (destroyCubit) disposeData(dataKey)
             }
         }
     }
@@ -77,7 +75,7 @@ object ActivityScope {
      */
     private fun disposeData(dataKey: String) {
         val data = storage[dataKey] ?: return
-        data.activityProvider().lifecycle.removeObserver(data.lifecycleObserver)
+        data.activity?.lifecycle?.removeObserver(data.lifecycleObserver)
         storage[dataKey]?.cubit?.dispose()
         storage.remove(dataKey)
     }

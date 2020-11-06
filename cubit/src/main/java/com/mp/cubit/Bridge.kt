@@ -21,7 +21,10 @@ import kotlin.reflect.KClass
  * <p>
  * Copyright by Michael Pankraz
  */
-@Deprecated("LifecycleScope will be removed soon, please use 'ActivityScope' or 'FragmentScope' instead.")
+@Deprecated(
+    message = "LifecycleScope will be removed soon, please use 'ActivityScope' or 'FragmentScope' instead.",
+    replaceWith = ReplaceWith("Cubit.of(activity, cubit, identifier, onCreate)")
+)
 @CubitDsl
 fun <C : Cubit<S>, S : Any> Cubit.Companion.of(
     lifecycleOwner: LifecycleOwner,
@@ -47,12 +50,12 @@ fun <C : Cubit<S>, S : Any> Cubit.Companion.of(
  */
 @CubitDsl
 fun <C : Cubit<S>, S : Any> Cubit.Companion.of(
-    activityProvider: () -> AppCompatActivity,
+    activity: AppCompatActivity,
     cubit: KClass<C>,
     identifier: String? = null,
     onCreate: CubitProvider<C>
 ): C {
-    return ActivityScope.provide(cubit, activityProvider, identifier ?: "", onCreate)
+    return ActivityScope.provide(cubit, activity, identifier ?: "", onCreate)
 }
 
 /**
