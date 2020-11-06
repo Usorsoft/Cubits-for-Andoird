@@ -1,5 +1,6 @@
 package com.mp.cubit.scope
 
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
@@ -12,62 +13,45 @@ import kotlin.reflect.KClass
  * This provides a [Cubit] for a [LifecycleOwner] and ensures that the [Cubit] survives its
  * configuration changes.
  */
-@Deprecated("LifecycleScope will be removed soon, please use 'ActivityScope' or 'FragmentScope' instead.")
-object LifecycleOwnerScope {
-    data class Data(val cubit: Cubit<*>, var destroyedAt: Long? = null)
-
-    private val storage = mutableMapOf<String, Data>()
-    private const val CUBIT_SURVIVE_DURATION_IN_MS = 2_000
+object FragmentScope {
+    private val storage = mutableMapOf<String, Cubit<*>>()
 
     fun <CUBIT : Cubit<STATE>, STATE : Any> provide(
         kClass: KClass<CUBIT>,
-        lifecycleOwner: LifecycleOwner,
+        lifecycleOwner: Fragment,
         identifier: String = "",
         onCreate: CubitProvider<CUBIT>
     ): CUBIT {
-        disposeExpiredCubits()
         val key = keyOf(kClass, lifecycleOwner, identifier)
-        val data = storage[key] ?: Data(onCreate(kClass.java))
-        data.destroyedAt = null
+        val cubit = storage[key] ?: onCreate(kClass.java)
 
         lifecycleOwner.lifecycle.addObserver(object : LifecycleObserver {
             @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
             fun onDestroy() {
-                data.destroyedAt = System.currentTimeMillis()
+                if (lifecycleOwner.isRemoving) {
+                    storage[key]?.dispose()
+                    storage.remove(key)
+                }
             }
         })
 
-        storage[key] = data
-        return data.cubit as CUBIT
-    }
-
-    private fun disposeExpiredCubits() {
-        val expirationTime = System.currentTimeMillis() - CUBIT_SURVIVE_DURATION_IN_MS
-
-        val expiredEntries = storage.filter {
-            val destroyedAt = it.value.destroyedAt ?: return@filter false
-            expirationTime >= destroyedAt
-        }
-
-        expiredEntries.forEach {
-            it.value.cubit.dispose()
-            storage.remove(it.key)
-        }
+        storage[key] = cubit
+        return cubit as CUBIT
     }
 
     fun <CUBIT : Cubit<STATE>, STATE : Any> dispose(
         kClass: KClass<CUBIT>,
-        lifecycleOwner: LifecycleOwner,
+        lifecycleOwner: Fragment,
         identifier: String? = ""
     ) {
         val key = keyOf(kClass, lifecycleOwner, identifier)
-        storage[key]?.cubit?.dispose()
+        storage[key]?.dispose()
         storage.remove(key)
     }
 
     private fun <CUBIT : Cubit<STATE>, STATE : Any> keyOf(
         kClass: KClass<CUBIT>,
-        lifecycleOwner: LifecycleOwner,
+        lifecycleOwner: Fragment,
         identifier: String? = null
     ): String {
         return "${lifecycleOwner::class.java.simpleName}:${kClass.simpleName}:$identifier"

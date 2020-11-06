@@ -1,12 +1,11 @@
 package com.mp.cubit
 
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import com.mp.cubit.foundation.CubitDsl
 import com.mp.cubit.foundation.CubitProvider
-import com.mp.cubit.scope.CubitScope
-import com.mp.cubit.scope.GlobalScope
-import com.mp.cubit.scope.LifecycleOwnerScope
-import com.mp.cubit.scope.ManualScope
+import com.mp.cubit.scope.*
 import kotlin.reflect.KClass
 
 /**
@@ -22,6 +21,10 @@ import kotlin.reflect.KClass
  * <p>
  * Copyright by Michael Pankraz
  */
+@Deprecated(
+    message = "LifecycleScope will be removed soon, please use 'ActivityScope' or 'FragmentScope' instead.",
+    replaceWith = ReplaceWith("Cubit.of(activity, cubit, identifier, onCreate)")
+)
 @CubitDsl
 fun <C : Cubit<S>, S : Any> Cubit.Companion.of(
     lifecycleOwner: LifecycleOwner,
@@ -30,6 +33,52 @@ fun <C : Cubit<S>, S : Any> Cubit.Companion.of(
     onCreate: CubitProvider<C>
 ): C {
     return LifecycleOwnerScope.provide(cubit, lifecycleOwner, identifier ?: "", onCreate)
+}
+
+/**
+ * This provides a [Cubit] from the [ActivityScope] store if there is one, otherwise
+ * it creates a new one via [onCreate] and provides this one.
+ *
+ * Use this to keep the [Cubit] alive trough configuration changes.
+ *
+ * Specify a [identifier] if you want to have more than on [Cubit] of the same type
+ * per [activityProvider].
+ *
+ * Created by Michael Pankraz on 12.07.20.
+ * <p>
+ * Copyright by Michael Pankraz
+ */
+@CubitDsl
+fun <C : Cubit<S>, S : Any> Cubit.Companion.of(
+    activity: AppCompatActivity,
+    cubit: KClass<C>,
+    identifier: String? = null,
+    onCreate: CubitProvider<C>
+): C {
+    return ActivityScope.provide(cubit, activity, identifier ?: "", onCreate)
+}
+
+/**
+ * This provides a [Cubit] from the [FragmentScope] store if there is one, otherwise
+ * it creates a new one via [onCreate] and provides this one.
+ *
+ * Use this to keep the [Cubit] alive trough configuration changes.
+ *
+ * Specify a [identifier] if you want to have more than on [Cubit] of the same type
+ * per [lifecycleOwner].
+ *
+ * Created by Michael Pankraz on 12.07.20.
+ * <p>
+ * Copyright by Michael Pankraz
+ */
+@CubitDsl
+fun <C : Cubit<S>, S : Any> Cubit.Companion.of(
+    lifecycleOwner: Fragment,
+    cubit: KClass<C>,
+    identifier: String? = null,
+    onCreate: CubitProvider<C>
+): C {
+    return FragmentScope.provide(cubit, lifecycleOwner, identifier ?: "", onCreate)
 }
 
 /**
