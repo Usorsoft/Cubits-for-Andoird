@@ -1,0 +1,4 @@
+#!/bin/bash
+
+PAGES_DIRECTORY_PATH=example/src/main/java/com/mp/example/pages/
+PACKAGE_NAME=com.mp.example
